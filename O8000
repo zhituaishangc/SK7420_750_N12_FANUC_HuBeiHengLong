@@ -1,0 +1,45 @@
+%
+O8000 ( initialization parameters)
+N10   IF[[#606 EQ 0] AND [#1002 EQ 1]] THEN #780=#608 
+N40   IF[#601 LT 1] THEN #601=1 
+N50   #700=#601*#603 (Screw Lead)
+N60   #701=360
+N70   IF[[#617 GT 0.3] OR [#621 GT 0.3]] GOTO310 (ERROR1) 
+N71   IF[[#625 GT 0.3] OR [#629 GT 0.3]] GOTO310 (ERROR1)
+N72   IF[[#721 GT 0.3] OR [#723 GT 0.3]] GOTO310 (ERROR1) 
+N73   IF[[#725 GT 0.3] OR [#727 GT 0.3]] GOTO310 (ERROR1) 
+N80   IF[#611 LT 0] GOTO340 (ERROR2)
+N90   IF[#591 LT 0] GOTO360 (ERROR3)
+N100  IF[#601 GT 1] THEN #702=#701/#601 (average head_ang)
+N101  IF[#601 GT 1] GOTO111
+N110  #702=0
+N111  IF [#900 EQ 0] GOTO120(other ways)
+N114  #604=#902+#900+#903*#700(work_right_z)
+N115  #605=#902+#900-#904*#700(work_left_z )
+N120  #799=ABS[#605-#604]
+N130  #703=#799
+N140  #704=#799/#700 
+N150  IF[#607 NE 0] THEN #703=#703+#607 
+N170  #706=#700 (Screw Lead)
+N180  #598=#704*360 (C_TOTAL_ANGLE)
+N190  IF[#602 EQ -1] GOTO200 (Set the start and end point)
+N191  #710=#604   (work_right_z)
+N192  #711=#605
+N193  GOTO220
+N200  #710=#605  (work_left_z)
+N210  #711=#604  (work_right_z)
+N220  IF[#609 LT 0] GOTO380 (ERROR4,taper) 
+N230  IF[#609 GT 0] #712=#609
+N231  IF[#609 GT 0] GOTO999(END) 
+N240  #712=0 
+N300  GOTO999(END) 
+N310  #3000=1(Process set the depth beyond ) 
+N320  GOTO390
+N340  #3000=2(Grinding wheel back setup error need>0)
+N350  GOTO390
+N360  #3000=3(The buffer distance setup error,need>0)
+N370  GOTO390
+N380  #3000=4(Taper setting error )
+N390  G04 X999
+N999  M99
+%

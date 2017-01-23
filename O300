@@ -1,0 +1,6 @@
+%
+O300  (Rapid travel of wheelhead)
+N10  G91 G01 X20 F2000
+N20  G04 X9999
+N30  M30
+%
