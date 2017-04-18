@@ -12,6 +12,7 @@ N160  #687=FIX[#686]
 N170  #688=#686-#687 
 N180  #689=#701*#688 
 N190  #760=#682-#689 (Right and Left,FIRST,initial C_ANG calculate)
+N195  IF[#602EQ-1] THEN #760=#682+#689
 N200  IF [#760 GE 360] THEN #760=#760-#701
 N210  IF [#760 LT 0] THEN #760=#760+#701 (compare with 360)
 N215  GOTO240 (First end)
